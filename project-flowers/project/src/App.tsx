@@ -136,7 +136,7 @@ function App() {
         // Using multiple images
         <Cat 
           img={[
-            "/Flower-Garden/assets/first_cat.png'",
+            "/Flower-Garden/assets/first_cat.png",
             "/Flower-Garden/assets/second_cat.png",
             "/Flower-Garden/assets/third_cat.png",
             "/Flower-Garden/assets/fourth_cat.png",
