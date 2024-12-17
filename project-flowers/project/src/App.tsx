@@ -109,9 +109,6 @@ function App() {
       />
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Auth Button */}
-        <AuthButton user={user}/>
-
         {/* Header */}
         <div className="bg-black bg-opacity-50 p-6 text-center">
           <h1 className="text-4xl font-bold text-white mb-2">O Nosso Jardim</h1>
