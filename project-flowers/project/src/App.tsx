@@ -101,7 +101,7 @@ function App() {
       <div 
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: "url('/assets/grass2.jpg')",
+          backgroundImage: "url('/Flower-Garden/assets/grass2.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           height: '100%'
@@ -131,21 +131,21 @@ function App() {
 
         {/* Spacer to push garden to bottom */}
         <div className="flex-grow" />
-        <Cat img="../assets/pusheen-love.gif" direction="right-to-left" time_to_repeat={15000} animation_duration="8s"/>
+        <Cat img="url('/Flower-Garden/assets/pusheen-love.gif')" direction="right-to-left" time_to_repeat={15000} animation_duration="8s"/>
 
         // Using multiple images
         <Cat 
           img={[
-            "../assets/first_cat.png",
-            "../assets/second_cat.png",
-            "../assets/third_cat.png",
-            "../assets/fourth_cat.png",
+            "url('../Flower-Garden/assets/first_cat.png')",
+            "url('../Flower-Garden/assets/second_cat.png')",
+            "url('../Flower-Garden/assets/third_cat.png')",
+            "url('../Flower-Garden/assets/fourth_cat.png')",
           ]}
           direction="left-to-right"
           time_to_repeat={8000}
           animation_duration="3s"
         />
-        <img src="../assets/cats-cat.gif" alt="" style={{width:'10%', bottom: '0px', position: 'absolute', zIndex: 10000}} />
+        <img src="../Flower-Garden/assets/cats-cat.gif" alt="" style={{width:'10%', bottom: '0px', position: 'absolute', zIndex: 10000}} />
         {/* Garden Plot */}
         <div className="w-full max-w-6xl mx-auto mb-10 px-3">
           <div className="bg-black bg-opacity-0  rounded-lg p-8 border-brown-700 border-opacity-40">
