@@ -22,11 +22,37 @@ export function AuthButton({ user }: AuthButtonProps) {
     }
   }, [user]);
 
+  // Use this useEffect to handle the OAuth token from the URL
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const params = new URLSearchParams(hash.substring(1)); // remove the '#' from the beginning
+      const accessToken = params.get('access_token');
+      const providerToken = params.get('provider_token');
+      const expiresAt = params.get('expires_at');
+      const tokenType = params.get('token_type');
+
+      // If an access token is found in the URL
+      if (accessToken) {
+        // Log in the user using the token
+        supabase.auth.setSession({
+          access_token: accessToken,
+          provider_token: providerToken,
+          expires_at: parseInt(expiresAt || '0'),
+          token_type: tokenType,
+        });
+
+        // Clear the URL hash after login
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.search);
+      }
+    }
+  }, []);
+
   const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: window.location.origin, // Redirect after login
+        redirectTo: 'https://jplemos5.github.io/Flower-Garden/', // Redirect after login for the deployed version
       },
     });
 
@@ -54,8 +80,8 @@ export function AuthButton({ user }: AuthButtonProps) {
         </>
       ) : (
         <>
-          <LogIn size={0.1} />
-          <span  className="hidden sm:block"></span>
+          <LogIn size={14} />
+          <span className="hidden sm:block">Sign In</span>
         </>
       )}
     </button>
