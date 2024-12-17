@@ -131,15 +131,15 @@ function App() {
 
         {/* Spacer to push garden to bottom */}
         <div className="flex-grow" />
-        <Cat img="url('/Flower-Garden/assets/pusheen-love.gif')" direction="right-to-left" time_to_repeat={15000} animation_duration="8s"/>
+        <Cat img="/Flower-Garden/assets/pusheen-love.gif" direction="right-to-left" time_to_repeat={15000} animation_duration="8s"/>
 
         // Using multiple images
         <Cat 
           img={[
-            "url('/Flower-Garden/assets/first_cat.png')",
-            "url('/Flower-Garden/assets/second_cat.png')",
-            "url('/Flower-Garden/assets/third_cat.png')",
-            "url('/Flower-Garden/assets/fourth_cat.png')",
+            "/Flower-Garden/assets/first_cat.png'",
+            "/Flower-Garden/assets/second_cat.png",
+            "/Flower-Garden/assets/third_cat.png",
+            "/Flower-Garden/assets/fourth_cat.png",
           ]}
           direction="left-to-right"
           time_to_repeat={8000}
