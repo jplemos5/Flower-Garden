@@ -136,16 +136,16 @@ function App() {
         // Using multiple images
         <Cat 
           img={[
-            "url('../Flower-Garden/assets/first_cat.png')",
-            "url('../Flower-Garden/assets/second_cat.png')",
-            "url('../Flower-Garden/assets/third_cat.png')",
-            "url('../Flower-Garden/assets/fourth_cat.png')",
+            "url('/Flower-Garden/assets/first_cat.png')",
+            "url('/Flower-Garden/assets/second_cat.png')",
+            "url('/Flower-Garden/assets/third_cat.png')",
+            "url('/Flower-Garden/assets/fourth_cat.png')",
           ]}
           direction="left-to-right"
           time_to_repeat={8000}
           animation_duration="3s"
         />
-        <img src="../Flower-Garden/assets/cats-cat.gif" alt="" style={{width:'10%', bottom: '0px', position: 'absolute', zIndex: 10000}} />
+        <img src="/Flower-Garden/assets/cats-cat.gif" alt="" style={{width:'10%', bottom: '0px', position: 'absolute', zIndex: 10000}} />
         {/* Garden Plot */}
         <div className="w-full max-w-6xl mx-auto mb-10 px-3">
           <div className="bg-black bg-opacity-0  rounded-lg p-8 border-brown-700 border-opacity-40">
