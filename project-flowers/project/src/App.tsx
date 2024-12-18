@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FlowerCard } from './components/FlowerCard';
 import { AddFlowerForm } from './components/AddFlowerForm';
 import Cat  from './components/Cat';
-import { AuthButton } from './components/AuthButton';
 import { supabase, type Flower } from './lib/supabase';
 
 function App() {
@@ -129,8 +128,6 @@ function App() {
         {/* Spacer to push garden to bottom */}
         <div className="flex-grow" />
         <Cat img="/Flower-Garden/assets/pusheen-love.gif" direction="right-to-left" time_to_repeat={15000} animation_duration="8s"/>
-
-        // Using multiple images
         <Cat 
           img={[
             "/Flower-Garden/assets/first_cat.png",
