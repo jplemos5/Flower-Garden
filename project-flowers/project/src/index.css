@@ -35,3 +35,34 @@ body {
   opacity: 1;
 }
 
+.cat-clicked-right {
+  animation: cat-clicked-right-animation 0.6s ease-out forwards; /* Trigger animation when clicked */
+}
+
+.cat-clicked-left {
+  animation: cat-clicked-left-animation 0.6s ease-out forwards; /* Trigger animation when clicked */
+}
+
+@keyframes cat-clicked-right-animation {
+  from {
+    opacity: 1;
+    transform: scale(1) rotate(0deg); /* Start with normal size and no rotation */
+  }
+
+  to {
+    opacity: 0; /* Fade out */
+    transform: scale(0.4) rotate(720deg); /* Scale to 2x and rotate 720 degrees */
+  }
+}
+
+@keyframes cat-clicked-left-animation {
+  from {
+    opacity: 1;
+    transform: scale(1) rotate(0deg); /* Start with normal size and no rotation */
+  }
+
+  to {
+    opacity: 0; /* Fade out */
+    transform: scale(0.4) rotate(-720deg); /* Scale to 2x and rotate 720 degrees */
+  }
+}

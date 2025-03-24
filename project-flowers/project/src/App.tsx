@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlowerCard } from './components/FlowerCard';
 import { AddFlowerForm } from './components/AddFlowerForm';
 import Cat  from './components/Cat';
 import { supabase, type Flower } from './lib/supabase';
+import Score from './components/Score';
 
 function App() {
   const [flowers, setFlowers] = useState<Flower[]>([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [score, setScore] = useState<number>(0);
+
+  const increaseScore = (points: number) => {
+    setScore((prevScore) => prevScore + points);
+  };
 
   useEffect(() => {
     // Check current auth status
@@ -108,13 +114,20 @@ function App() {
       />
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Header */}
-        <div className="bg-black bg-opacity-50 p-6 text-center">
+      {/* Header */}
+      <div className="bg-black bg-opacity-50 p-6 text-center flex justify-center items-center relative">
+      {/* Centered Content */}
+        <div className="text-center">
           <h1 className="text-4xl font-bold text-white mb-2">O Nosso Jardim</h1>
           <p className="text-gray-200">
             {user ? 'Start adding your beautiful flowers!' : 'Aproveita a vista do nosso jardim.'}
           </p>
         </div>
+      {/* Score Bar Positioned in the Top Right */}
+        <div className="absolute top-6 right-6">
+          <Score score={score} />
+        </div>
+      </div>
 
         {/* Loading State */}
         {loading && (
@@ -127,7 +140,8 @@ function App() {
 
         {/* Spacer to push garden to bottom */}
         <div className="flex-grow" />
-        <Cat img="/Flower-Garden/assets/pusheen-love.gif" direction="right-to-left" time_to_repeat={15000} animation_duration="8s"/>
+        <Cat img="/Flower-Garden/assets/pusheen-love.gif" direction="right-to-left" time_to_repeat={15000} animation_duration="8s" scoreOnClick={100} increaseScore={increaseScore}/>
+        <Cat img="/Flower-Garden/assets/giphy.gif" direction="left-to-right" time_to_repeat={13000} animation_duration="15s" scoreOnClick={100} increaseScore={increaseScore}/>
         <Cat 
           img={[
             "/Flower-Garden/assets/first_cat.png",
@@ -138,6 +152,8 @@ function App() {
           direction="left-to-right"
           time_to_repeat={8000}
           animation_duration="3s"
+          scoreOnClick={200}
+          increaseScore={increaseScore}
         />
         <img src="/Flower-Garden/assets/cats-cat.gif" alt="" style={{width:'10%', bottom: '0px', position: 'absolute', zIndex: 10000}} />
         {/* Garden Plot */}

@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
 
-const Cat = ({ img, direction = "left-to-right", time_to_repeat, animation_duration }) => {
+interface CatProps {
+  img: string | string[];
+  direction: "left-to-right" | "right-to-left";
+  time_to_repeat: number;
+  animation_duration: string;
+  scoreOnClick: number;
+  increaseScore: (points: number) => void;
+}
+
+const Cat: React.FC<CatProps> = ({ img, direction = "left-to-right", time_to_repeat, animation_duration, scoreOnClick, increaseScore}) => {
   const [leftPosition, setLeftPosition] = useState(direction === "left-to-right" ? -200 : window.innerWidth); // Start position
   const [topPosition, setTopPosition] = useState(0); // Random vertical position
   const [isVisible, setIsVisible] = useState(false); // Whether the cat is visible
   const [isMoving, setIsMoving] = useState(false); // Whether the cat is currently moving
   const [currentFrame, setCurrentFrame] = useState(0); // Current frame for cycling through images
   const catHeight = 80; // Height of your cat image (adjust accordingly)
+  const [isClicked, setIsClicked] = useState(false);
 
   // Check if img is a GIF or an array of images
   const isGif = typeof img === "string"; // If it's a string, assume it's a GIF
   const catImages = Array.isArray(img) ? img : [img]; // If it's an array, use it; otherwise, wrap the single image
 
   const moveCat = () => {
+    if (isClicked) return;
     const screenWidth = window.innerWidth; // Get screen width
     const screenHeight = window.innerHeight; // Get screen height
 
@@ -69,12 +80,33 @@ const Cat = ({ img, direction = "left-to-right", time_to_repeat, animation_durat
   }, [isMoving]); // Depend on `isMoving` to make sure it waits for the cat to finish
 
   const trans_str = 'left ' + animation_duration + ' linear'
+
+  const handleClick = () => {
+    if (isClicked) return; // Prevent multiple clicks
+
+    increaseScore(scoreOnClick);
+    setIsClicked(true);
+
+    // Add the "cat-clicked" class with a slight delay to trigger the animation
+    setTimeout(() => {
+      setIsClicked(true);
+    }, 10); // Delay before applying the animation class
+
+    // Remove cat after animation ends
+    setTimeout(() => {
+      setIsVisible(false);
+      setIsClicked(false);
+    }, 600); // Adjust timing to match animation (600ms is the duration)
+  };
+
   return (
-    <div>
+    <div onClick={handleClick}>
       {isVisible && (
         <img
           src={catImages[currentFrame]} // Use the current frame or the single GIF
           alt="Cat"
+          className={`cat-image ${isClicked ? (direction === "left-to-right" ? "cat-clicked-right" : "cat-clicked-left") : ""}`}
+
           style={{
             position: 'absolute',
             top: `${topPosition}px`,
@@ -82,7 +114,8 @@ const Cat = ({ img, direction = "left-to-right", time_to_repeat, animation_durat
             transition: trans_str, // Smooth movement of the cat
             zIndex: 1, // Ensure the cat stays on top of other elements
             height: 110,
-          }}
+            }
+          }
         />
       )}
     </div>
